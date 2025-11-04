@@ -7,6 +7,10 @@ def main():
 
     while wordle.can_attempt:
         x = input("Type your guess: ")
+
+        if len(x) != wordle.WORD_LENGTH:
+            print(f"word length must be {wordle.WORD_LENGTH} characters long")
+            continue
         wordle.attempt(x)
         result = wordle.guess(x)
         print(*result, sep="\n")
@@ -15,6 +19,8 @@ def main():
         print("you have solved the puzzle.")
     else:
         print("you failed to sdolve the puzzle!")
+
+
 
 if __name__ == "__main__":
     main()

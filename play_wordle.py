@@ -36,6 +36,9 @@ def display_board(wordle: Wordle):
     Print a fixed 6-row board: previous guesses in color, remaining rows as underscores
     """
     print("\nyour results so far...\n")
+    print(f"you have {wordle.remaining_attempts} attempts remaining.\n")
+
+    lines = []
     # Print previous guesses in order
     for word in wordle.attempts:
         result = wordle.guess(word)
@@ -45,6 +48,8 @@ def display_board(wordle: Wordle):
     remaining = wordle.MAX_ATTEMPTS - len(wordle.attempts)
     for _ in range(remaining):
         print("_" * wordle.WORD_LENGTH)
+
+    draw_border_around(lines)
 
 def convert_result_to_color(result: List[LetterState]) -> str:
     """
@@ -60,6 +65,12 @@ def convert_result_to_color(result: List[LetterState]) -> str:
             color = Fore.WHITE
         colored_result.append(color + letter.character)
     return "".join(colored_result)
+
+def draw_border_around(lines: List[str] , size: int=9, pad: int=1):
+        
+    content_length = size + pad *2    
+    top_border = "┌" + "─" * content_length + "┐"
+
 
 if __name__ == "__main__":
     main()

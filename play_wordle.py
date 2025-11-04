@@ -5,11 +5,11 @@ def main():
     wordle = Wordle("APPLE")
     print(wordle)
 
-    while True:
+    while wordle.can_attempt:
         x = input("Type your guess: ")
-        if x == wordle.secret:
-            print("you have guessed the word!")
-            break
-        print("your guess is incorrect")
+        wordle.attempts(x)
+    if wordle.is_solved:
+        print("you have solved the puzzle.")
+
 if __name__ == "__main__":
     main()

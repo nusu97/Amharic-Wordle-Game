@@ -8,6 +8,9 @@ class Wordle:
         self.attempts = []
         pass
 
+    def attempt(self, word: str):
+        self.attempts.append(word)
+
     @property
     def is_solved(self):
         return self.attempts[-1] == self.secret
@@ -19,4 +22,4 @@ class Wordle:
     @property
     def can_attempt(self):
         return len(self.attempt) < self.MAX_ATTEMPTS and not self.is_solved
-        pass
+        

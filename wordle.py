@@ -11,3 +11,8 @@ class Wordle:
     @property
     def is_solved(self):
         return self.attempts[-1] == self.secret
+    
+    @property
+    def can_attempt(self):
+        return len(self.attempt) < self.MAX_ATTEMPTS and not self.is_solved
+        pass

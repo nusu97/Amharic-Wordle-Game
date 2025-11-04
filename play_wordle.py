@@ -24,7 +24,19 @@ def main():
 def display_results(wordle: Wordle):
     for word in wordle.attempts:
         result = wordle.guess(word)
+        colored_result_str = convert_result_to_color(result)
+        print(colored_result_str)
     pass
-
+def convert_result_to_color(result: List[LetterState]):
+    result_with__color = []
+    for letter in result:
+        if letter.is_in_position:
+            color = Fore.GREEN
+        elif letter.is_in_word:
+            color = Fore.YELLOW
+        else:
+            color = Fore.WHITE
+        colored_letter = color + letter.character + Fore.RESET
+        return "".join(result_with__color)
 if __name__ == "__main__":
     main()

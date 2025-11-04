@@ -42,12 +42,12 @@ def display_board(wordle: Wordle):
     # Print previous guesses in order
     for word in wordle.attempts:
         result = wordle.guess(word)
-        print(convert_result_to_color(result))
+        lines.append(convert_result_to_color(result))
 
     # Print remaining empty rows
     remaining = wordle.MAX_ATTEMPTS - len(wordle.attempts)
     for _ in range(remaining):
-        print("_" * wordle.WORD_LENGTH)
+        lines.append("_" * wordle.WORD_LENGTH)
 
     draw_border_around(lines)
 
@@ -67,9 +67,20 @@ def convert_result_to_color(result: List[LetterState]) -> str:
     return "".join(colored_result)
 
 def draw_border_around(lines: List[str] , size: int=9, pad: int=1):
-        
-    content_length = size + pad *2    
-    top_border = "┌" + "─" * content_length + "┐"
+    content_width = max(len(line) for line in lines)
+    content_width = max(content_width, size)
+
+    # Top and bottom borders
+    top_border = "┌" + "─" * (content_width + pad * 2) + "┐"
+    bottom_border = "└" + "─" * (content_width + pad * 2) + "┘"
+
+    print(top_border)
+    for line in lines:
+        # Center the line inside content width
+        line_centered = line.center(content_width)
+        space = " " * pad
+        print(f"│{space}{line_centered}{space}│")
+    print(bottom_border)
 
 
 if __name__ == "__main__":

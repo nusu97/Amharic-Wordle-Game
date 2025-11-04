@@ -1,5 +1,9 @@
 from wordle import Wordle
 from colorama import Fore
+from letter_state import LetterState
+from typing import List
+from colorama import init
+init(autoreset=True)
 
 def main():
     print("Hello World") 
@@ -12,14 +16,16 @@ def main():
         if len(x) != wordle.WORD_LENGTH:
             print(Fore.RED + f"word length must be {wordle.WORD_LENGTH} characters long" + Fore.RESET)
             continue
+
         wordle.attempt(x)
         result = wordle.guess(x)
-        print(*result, sep="\n")
+        colored_result = convert_result_to_color(result)
+        print(colored_result)
 
     if wordle.is_solved:
-        print("you have solved the puzzle.")
+        print(Fore.GREEN + "you have solved the puzzle.")
     else:
-        print("you failed to sdolve the puzzle!")
+        print(Fore.RED + "you failed to sdolve the puzzle!")
 
 def display_results(wordle: Wordle):
     for word in wordle.attempts:
@@ -28,7 +34,7 @@ def display_results(wordle: Wordle):
         print(colored_result_str)
     pass
 def convert_result_to_color(result: List[LetterState]):
-    result_with__color = []
+    result_with_color = []
     for letter in result:
         if letter.is_in_position:
             color = Fore.GREEN
@@ -36,7 +42,9 @@ def convert_result_to_color(result: List[LetterState]):
             color = Fore.YELLOW
         else:
             color = Fore.WHITE
-        colored_letter = color + letter.character + Fore.RESET
-        return "".join(result_with__color)
+        colored_letter = color + letter.character 
+        result_with_color.append(colored_letter)
+    return "".join(result_with_color)
+
 if __name__ == "__main__":
     main()

@@ -1,4 +1,5 @@
 from wordle import Wordle
+from colorama import Fore
 
 def main():
     print("Hello World") 
@@ -9,7 +10,7 @@ def main():
         x = input("Type your guess: ")
 
         if len(x) != wordle.WORD_LENGTH:
-            print(f"word length must be {wordle.WORD_LENGTH} characters long")
+            print(Fore.RED + f"word length must be {wordle.WORD_LENGTH} characters long" + Fore.RESET)
             continue
         wordle.attempt(x)
         result = wordle.guess(x)

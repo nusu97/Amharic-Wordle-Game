@@ -33,6 +33,10 @@ def display_results(wordle: Wordle):
         colored_result_str = convert_result_to_color(result)
         print(colored_result_str)
     pass
+
+    for _ in range(wordle.resmaining_attempts):
+        print("-" * wordle.WORD_LENGTH)
+        
 def convert_result_to_color(result: List[LetterState]):
     result_with_color = []
     for letter in result:

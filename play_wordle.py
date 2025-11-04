@@ -21,7 +21,10 @@ def main():
     else:
         print("you failed to sdolve the puzzle!")
 
-
+def display_results(wordle: Wordle):
+    for word in wordle.attempts:
+        result = wordle.guess(word)
+    pass
 
 if __name__ == "__main__":
     main()

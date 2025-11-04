@@ -1,5 +1,5 @@
 class LetterState:
-    def __int__(self, character: str):
+    def __init__(self, character: str):
         self.character: str = character
         self.is_in_word: bool = False
         self.is_in_position: bool = False

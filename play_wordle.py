@@ -1,44 +1,56 @@
 from wordle import Wordle
-from colorama import Fore
 from letter_state import LetterState
+from colorama import Fore, init
 from typing import List
-from colorama import init
-init(autoreset=True)
+
+init(autoreset=True)  # Colorama auto-reset
 
 def main():
-    print("Hello World") 
-    wordle = Wordle("APPLE")
-    
+    print("Welcome to Wordle!\n")
+    wordle = Wordle("APPLE")  # secret word
 
     while wordle.can_attempt:
-        x = input("Type your guess: ")
+        # Display full board every turn
+        display_board(wordle)
 
-        if len(x) != wordle.WORD_LENGTH:
-            print(Fore.RED + f"word length must be {wordle.WORD_LENGTH} characters long" + Fore.RESET)
+        guess = input("\nType your guess: ").strip().upper()
+
+        if len(guess) != wordle.WORD_LENGTH:
+            print(Fore.RED + f"Word length must be {wordle.WORD_LENGTH} characters long")
             continue
 
-        wordle.attempt(x)
-        result = wordle.guess(x)
-        colored_result = convert_result_to_color(result)
-        print(colored_result)
+        wordle.attempt(guess)
 
-    if wordle.is_solved:
-        print(Fore.GREEN + "you have solved the puzzle.")
-    else:
-        print(Fore.RED + "you failed to sdolve the puzzle!")
+        # Check if solved immediately
+        if wordle.is_solved:
+            display_board(wordle)
+            print(Fore.GREEN + "\nCongratulations! You solved the puzzle!")
+            return
 
-def display_results(wordle: Wordle):
+    # Game over: not solved
+    display_board(wordle)
+    print(Fore.RED + f"\nYou failed to solve the puzzle. The word was: {wordle.secret}")
+
+def display_board(wordle: Wordle):
+    """
+    Print a fixed 6-row board: previous guesses in color, remaining rows as underscores
+    """
+    print("\nyour results so far...\n")
+    # Print previous guesses in order
     for word in wordle.attempts:
         result = wordle.guess(word)
-        colored_result_str = convert_result_to_color(result)
-        print(colored_result_str)
-    pass
+        print(convert_result_to_color(result))
 
-    for _ in range(wordle.resmaining_attempts):
-        print("-" * wordle.WORD_LENGTH)
-        
-def convert_result_to_color(result: List[LetterState]):
-    result_with_color = []
+    # Print remaining empty rows
+    remaining = wordle.MAX_ATTEMPTS - len(wordle.attempts)
+    for _ in range(remaining):
+        print("_" * wordle.WORD_LENGTH)
+
+def convert_result_to_color(result: List[LetterState]) -> str:
+    """
+    Convert list of LetterState to colored string
+    """
+    colored_result = []
     for letter in result:
         if letter.is_in_position:
             color = Fore.GREEN
@@ -46,9 +58,8 @@ def convert_result_to_color(result: List[LetterState]):
             color = Fore.YELLOW
         else:
             color = Fore.WHITE
-        colored_letter = color + letter.character 
-        result_with_color.append(colored_letter)
-    return "".join(result_with_color)
+        colored_result.append(color + letter.character)
+    return "".join(colored_result)
 
 if __name__ == "__main__":
     main()

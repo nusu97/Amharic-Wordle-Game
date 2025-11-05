@@ -2,13 +2,16 @@ from wordle import Wordle
 from letter_state import LetterState
 from colorama import Fore, init
 from typing import List
+from unittest.mock import DEFAULT
+import random
 
-init(autoreset=True)  # Colorama auto-reset
+init(autoreset=True)  
 
 def main():
+    word_set = load_word_set("wordle_words.txt")
+    secret = random.choice(list(word_set))
     print("Welcome to Wordle!\n")
-    wordle = Wordle("APPLE")  # secret word
-
+    wordle = Wordle(secret)  
     while wordle.can_attempt:
         # Display full board every turn
         display_board(wordle)
@@ -50,6 +53,16 @@ def display_board(wordle: Wordle):
         lines.append("_" * wordle.WORD_LENGTH)
 
     draw_border_around(lines)
+
+
+def load_word_set(oath: str):
+    word_set = set()
+    with open(path, "r") as f:
+        for line in f.readlines():
+           word = line.strip().upper()
+           word_set.add(word)
+    return word_set
+
 
 def convert_result_to_color(result: List[LetterState]) -> str:
     """

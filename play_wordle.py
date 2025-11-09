@@ -54,13 +54,13 @@ def display_board(wordle: Wordle):
 
     draw_border_around(lines)
 
-
-def load_word_set(oath: str):
+def load_word_set(path: str):
     word_set = set()
-    with open(path, "r") as f:
-        for line in f.readlines():
-           word = line.strip().upper()
-           word_set.add(word)
+    with open(path, "r", encoding="utf-8") as f:
+        for line in f:
+            word = line.strip().upper()
+            if word:
+                word_set.add(word)
     return word_set
 
 

@@ -40,6 +40,10 @@ body {
 
 .status { min-height: 24px; margin: 12px 20px 16px; color: var(--muted); }
 .hint { color: var(--muted); margin-top: 8px; font-size: 0.9rem; }
+.info { margin: 14px 20px 4px; padding: 14px 16px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; font-size: 0.78rem; line-height: 1.45; color: #b6c2d4; backdrop-filter: blur(6px); }
+.info p { margin: 0 0 10px; }
+.info p:last-child { margin-bottom: 0; }
+.info .en-note { color: #93a7be; font-style: italic; }
 
 /* Board */
 .board {

@@ -18,6 +18,7 @@
         <h1>አማርኛ Wordle</h1>
       </div>
       <div class="controls">
+        <button id="infoBtn" class="btn btn-ghost" aria-controls="infoPanel" aria-expanded="false">ℹ️ Info</button>
         <button id="helpBtn" class="btn btn-ghost" aria-haspopup="dialog">እንዴት ልጫወት?</button>
         <button id="newGameBtn" class="btn">አዲስ ጨዋታ</button>
       </div>
@@ -35,6 +36,10 @@
       </form>
 
       <div id="hint" class="hint"></div>
+      <section id="infoPanel" class="info" hidden>
+        <p>ይህ ጨዋታ ለአማርኛ ተናጋሪዎች ተዘጋጅቶ ነው፣ በአማርኛ ቋንቋ ውስጥ የቴክኒክ ችሎታ ማሳየት ይረዳል። ቋንቋውን ወደ እንግሊዝኛ ለማስቀየር በአብዛኛው አሳሽ ላይ ቀኝ ጠቅ ያድርጉና "Translate to English" ይምረጡ።</p>
+        <p class="en-note">This game is intended for Amharic-speaking users and also showcases technical abilities (animations, state handling, accessibility). You can translate the interface to English using your browser's built‑in translation (right click → "Translate to English").</p>
+      </section>
     </main>
 
     <footer class="footer">

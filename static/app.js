@@ -19,6 +19,8 @@ const newGameBtn = document.getElementById("newGameBtn");
 const helpBtn = document.getElementById("helpBtn");
 const helpModal = document.getElementById("helpModal");
 const toastContainer = document.getElementById("toastContainer");
+const infoBtn = document.getElementById("infoBtn");
+const infoPanel = document.getElementById("infoPanel");
 
 function loadDictionary() {
   return fetch("wordle_words.txt")
@@ -188,6 +190,19 @@ guessForm.addEventListener("submit", (e) => {
   submitGuess(guessInput.value);
 });
 newGameBtn.addEventListener("click", () => { startGame(); showToast('አዲስ ጨዋታ', 'info'); });
+
+// Info panel toggle
+infoBtn?.addEventListener('click', () => {
+  const isHidden = infoPanel.hasAttribute('hidden');
+  if (isHidden) {
+    infoPanel.removeAttribute('hidden');
+    infoBtn.setAttribute('aria-expanded', 'true');
+    showToast('Info panel opened', 'info', 1600);
+  } else {
+    infoPanel.setAttribute('hidden', '');
+    infoBtn.setAttribute('aria-expanded', 'false');
+  }
+});
 
 // Init
 loadDictionary().then(() => startGame());

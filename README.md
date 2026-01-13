@@ -2,15 +2,15 @@
 
 A lightweight, fully client‑side Amharic Wordle you can deploy to Vercel as a static site. No backend required.
 
-# Live site
-https://amharic-wordle-game.vercel.app/
-
 ## Features
 - 4-letter Amharic words from `wordle_words.txt`
 - 6 attempts per game
 - Colored feedback (green/yellow/gray) with flip animation
 - Error feedback (shake), toast messages, and a help modal
 - Confetti when you win 🎉
+
+# Live site
+https://amharic-wordle-game.vercel.app/
 
 ## Local preview (Windows PowerShell)
 You can open `index.html` directly, but most browsers block `fetch()` for local files. Run a tiny static server instead:

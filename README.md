@@ -1,7 +1,9 @@
 # Amharic Wordle (Static Frontend)
 
 A lightweight, fully client‑side Amharic Wordle you can deploy to Vercel as a static site. No backend required.
-Live site: https://amharic-wordle-game.vercel.app/
+
+# Live site
+https://amharic-wordle-game.vercel.app/
 
 ## Features
 - 4-letter Amharic words from `wordle_words.txt`
